@@ -7,13 +7,16 @@ import styles from './styles';
 
 import getDimensions from './utils';
 import { ThreedyCondition } from '../../types';
+import { normalizeProgress } from '../../Utils/Thumbnail';
 
-const I3 = ({ printerConfig }) => {
+const I3 = ({ printerConfig, thumbnailUrl }) => {
 
     const {
         hass,
         config
     } = useContext(ThreedyContext);
+
+    const fallbackProgressColor = config.progress_color || '#222';
 
     const [dimensions, setDimensions] = useState(undefined);
 
@@ -42,7 +45,11 @@ const I3 = ({ printerConfig }) => {
         cus_entity = cus_progress ? hass.states[cus_progress['entity']] : undefined,
         cus_attr = cus_entity?.attributes[cus_progress['attribute']] || undefined
     }
-    const progress = (cus_attr || cus_entity?.state || (hass.states[config.use_mqtt ? `${config.base_entity}_print_progress` : `${config.base_entity}_job_percentage`] || { state: 0 }).state) / 100;
+    const progress = normalizeProgress(
+        cus_attr ||
+        cus_entity?.state ||
+        (hass.states[config.use_mqtt ? `${config.base_entity}_print_progress` : `${config.base_entity}_job_percentage`] || { state: 0 }).state
+    ) / 100;
 
     const x = useMotionValue(0);
 
@@ -73,9 +80,33 @@ const I3 = ({ printerConfig }) => {
                         </div>
 
                         <div style={{ ...styles.BuildArea, ...dimensions.BuildArea }}>
-                            <div
-                                style={{ ...styles.Print, height: `${progress * 100}%` }}
-                            />
+                            {
+                                thumbnailUrl ? (
+                                    <>
+                                        <div
+                                            style={{
+                                                ...styles.ThumbnailBackdrop,
+                                                backgroundImage: `url("${thumbnailUrl}")`
+                                            }}
+                                        />
+                                        <div
+                                            style={{
+                                                ...styles.ThumbnailReveal,
+                                                backgroundImage: `url("${thumbnailUrl}")`,
+                                                clipPath: `inset(${(1 - progress) * 100}% 0 0 0)`
+                                            }}
+                                        />
+                                    </>
+                                ) : (
+                                    <div
+                                        style={{
+                                            ...styles.Print,
+                                            height: `${progress * 100}%`,
+                                            backgroundColor: fallbackProgressColor
+                                        }}
+                                    />
+                                )
+                            }
                         </div>
 
                         <div style={{ ...styles.BuildPlate, ...dimensions.BuildPlate }} />

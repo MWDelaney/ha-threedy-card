@@ -41,7 +41,7 @@ class ThreedyEditor extends HTMLElement {
 
 }
 
-customElements.define('threedy-editor', ThreedyEditor);
+customElements.define('threedy-editor-dev', ThreedyEditor);
 
 
 class ThreedyCard extends HTMLElement {
@@ -85,21 +85,21 @@ class ThreedyCard extends HTMLElement {
 
 
     static getConfigElement() {
-        return document.createElement('threedy-editor');
+        return document.createElement('threedy-editor-dev');
     }
 
 
 }
 
-customElements.define('threedy-card', ThreedyCard);
+customElements.define('threedy-card-dev', ThreedyCard);
 
 
 // @ts-ignore
 window.customCards = window.customCards || [];
 // @ts-ignore
 window.customCards.push({
-    type: 'threedy-card',
-    name: "Threedy Card",
+    type: 'threedy-card-dev',
+    name: "Threedy Card Dev",
     preview: false,
-    description: "OctoPrint 3D Printer Card"
+    description: "OctoPrint 3D Printer Card (Dev)"
 })

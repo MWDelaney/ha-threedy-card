@@ -13,6 +13,7 @@ import styles from './styles';
 import Camera from "../Camera";
 import {percentComplete} from "../Stats/utils";
 import { ThreedyCondition } from '../../types';
+import { normalizeProgress, resolveThumbnailUrl } from '../../Utils/Thumbnail';
 
 
 const Card = ({ }) => {
@@ -43,7 +44,8 @@ const Card = ({ }) => {
     const theme = config.theme || 'Default';
     const vertical = config.vertical;
     const round = config.round;
-    const percent = percentComplete(hass, config);
+    const percent = normalizeProgress(percentComplete(hass, config));
+    const thumbnailUrl = resolveThumbnailUrl(hass, config);
 
 
     const borderRadius = styles[theme] ? styles[theme].borderRadius : styles['Default'].borderRadius;
@@ -153,6 +155,7 @@ const Card = ({ }) => {
                         <PrinterView
                             toggleVideo={toggleVideo}
                             hasCamera={config.camera_entity !== undefined}
+                            thumbnailUrl={thumbnailUrl}
                             style={{width: vertical ? 'auto' : '100%', flexGrow: 1}}
                         />
                         {

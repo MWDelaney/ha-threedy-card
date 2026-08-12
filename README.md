@@ -27,6 +27,7 @@
 
 - Live animation of 3D printer
 - Live camera view
+- Optional thumbnail reveal mode tied to print progress
 - Current states of various OctoPrint sensors
 - Tap to show/hide when printer is idle
 - Power button for a switch entity
@@ -99,6 +100,9 @@
 - ```use_mqtt``` &mdash; Use [MQTT integration](https://plugins.octoprint.org/plugins/homeassistant/) instead of OctoPrint API.
 - ```printer_config``` &mdash; Use in with ```printer_type``` to set a custom printer style. If omitted, the default for the type will be used. Use [this tool](https://google.com) to create a custom value.
 - ```camera_entity``` &mdash; Specify the entity ID of the camera entity you want to display **when the printer graphic is clicked**.
+- ```thumbnail_entity``` &mdash; Specify the entity used to fetch a thumbnail image that is revealed by print progress in the build area. If omitted, the card uses the fallback progress color instead.
+- ```thumbnail_attribute``` &mdash; Optional attribute name to read on ```thumbnail_entity``` for the image URL. If omitted, the card tries ```entity_picture```, ```thumbnail```, ```url```, then the entity state.
+- ```progress_color``` &mdash; Fallback color for the classic progress bar when no thumbnail source is available. Defaults to ```#222```.
 - ```light_entity``` &mdash; Specify the entity ID of a light you want to toggle for the printer.
 - ```power_entity``` &mdash; Specify the entity ID of a power switch you want to toggle for the printer.
 - ```always_show``` &mdash; Override the auto collapse of the card.
@@ -172,6 +176,9 @@ base_entity: '' # You can use it if you want to override some of sensors and let
 name: 'Ender 3 Pro'
 printer_type: I3
 camera_entity: camera.ender_3_pro_camera
+thumbnail_entity: camera.ender_3_pro_camera
+thumbnail_attribute: entity_picture
+progress_color: '#222'
 power_entity: switch.ender3pro_plug
 light_entity: light.ender3_printer
 always_show: true
@@ -227,6 +234,11 @@ font: 'Roboto'
 scale: 1.0
 round: false 
 always_show: true
+# Thumbnail reveal is enabled only when thumbnail_entity is set.
+thumbnail_entity: camera.ender_3_camera
+thumbnail_attribute: entity_picture
+# Used when thumbnail_entity is omitted or unavailable.
+progress_color: '#222'
 ```
 </details>
 
