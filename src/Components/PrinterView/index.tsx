@@ -6,7 +6,7 @@ import I3 from '../../Printers/I3';
 
 import styles from './styles';
 
-const PrinterView = ({ toggleVideo, hasCamera, style }) => {
+const PrinterView = ({ toggleVideo, hasCamera, thumbnailUrl, style }) => {
 
     const {
         hass,
@@ -49,7 +49,10 @@ const PrinterView = ({ toggleVideo, hasCamera, style }) => {
                 cursor: hasCamera ? 'pointer' : 'default'
             }}
         >
-            <Printer printerConfig={config.printer_config || Defaults[config.printer_type]} />
+            <Printer
+                printerConfig={config.printer_config || Defaults[config.printer_type]}
+                thumbnailUrl={thumbnailUrl}
+            />
         </div>
     )
 

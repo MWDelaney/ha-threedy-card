@@ -70,6 +70,18 @@ const getCameras = ( hass: HomeAssistant ) => {
 
 }
 
+const getThumbnailSources = ( hass: HomeAssistant ) => {
+
+    const sources = {};
+
+    Object.keys(hass.states).filter(
+        entityId => (/^(camera|image|sensor)\./g).test(entityId)
+    ).map(source => sources[source] = source);
+
+    return sources;
+
+}
+
 type ConfigEventData = {
     config: ThreedyConfig;
 }
@@ -110,6 +122,7 @@ export {
     getPrinters,
     getToggleables,
     getCameras,
+    getThumbnailSources,
     updateConfig,
     updateValue
 }

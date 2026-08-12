@@ -99,6 +99,9 @@
 - ```use_mqtt``` &mdash; Use [MQTT integration](https://plugins.octoprint.org/plugins/homeassistant/) instead of OctoPrint API.
 - ```printer_config``` &mdash; Use in with ```printer_type``` to set a custom printer style. If omitted, the default for the type will be used. Use [this tool](https://google.com) to create a custom value.
 - ```camera_entity``` &mdash; Specify the entity ID of the camera entity you want to display **when the printer graphic is clicked**.
+- ```thumbnail_entity``` &mdash; Specify the entity used to fetch a thumbnail image that is revealed by print progress in the build area. If omitted, the card uses the fallback progress color instead.
+- ```thumbnail_attribute``` &mdash; Optional attribute name to read on ```thumbnail_entity``` for the image URL. If omitted, the card tries ```entity_picture```, ```thumbnail```, ```url```, then the entity state.
+- ```progress_color``` &mdash; Fallback color for the classic progress bar when no thumbnail source is available. Defaults to ```#222```.
 - ```light_entity``` &mdash; Specify the entity ID of a light you want to toggle for the printer.
 - ```power_entity``` &mdash; Specify the entity ID of a power switch you want to toggle for the printer.
 - ```always_show``` &mdash; Override the auto collapse of the card.

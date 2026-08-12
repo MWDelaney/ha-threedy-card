@@ -10,6 +10,7 @@ import YesNoSelect from './Components/YesNoSelect';
 import {
     getCameras,
     getPrinters,
+    getThumbnailSources,
     getToggleables,
     printerName,
     updateConfig,
@@ -26,6 +27,7 @@ const Configurator = ({ hass, config, threedy }) => {
     const printers = getPrinters(hass);
     const toggleables = getToggleables(hass);
     const cameras = getCameras(hass);
+    const thumbnailSources = getThumbnailSources(hass);
 
     const [modifiedConfig, setModifiedConfig] = useState(config);
     const [advancedShown, setAdvancedShown] = useState(false);
@@ -199,6 +201,28 @@ const Configurator = ({ hass, config, threedy }) => {
                                     options={cameras}
                                     onSelect={(s) => _updateValue('camera_entity', s.value)}
                                     initial={ config.camera_entity || modifiedConfig.camera_entity }
+                                />
+
+                                <p style={{ ...styles.Label }}>Thumbnail Entity</p>
+                                <Select
+                                    placeholder="Select..."
+                                    options={thumbnailSources}
+                                    onSelect={(s) => _updateValue('thumbnail_entity', s.value)}
+                                    initial={ config.thumbnail_entity || modifiedConfig.thumbnail_entity }
+                                />
+
+                                <p style={{ ...styles.Label }}>Thumbnail Attribute</p>
+                                <Input
+                                    placeholder={"entity_picture"}
+                                    onUpdate={value => _updateValue('thumbnail_attribute', value)}
+                                    initial={config.thumbnail_attribute || modifiedConfig.thumbnail_attribute}
+                                />
+
+                                <p style={{ ...styles.Label }}>Progress Color</p>
+                                <Input
+                                    placeholder={"#222"}
+                                    onUpdate={value => _updateValue('progress_color', value)}
+                                    initial={config.progress_color || modifiedConfig.progress_color}
                                 />
 
                                 <p style={{ ...styles.Label }}>Power Entity</p>

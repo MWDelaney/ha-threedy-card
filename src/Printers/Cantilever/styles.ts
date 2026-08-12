@@ -73,6 +73,32 @@ const styles = {
         width: '100%'
     },
 
+    ThumbnailBackdrop: {
+        position: 'absolute',
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        opacity: 0.2,
+        filter: 'grayscale(0.45) brightness(0.7)'
+    },
+
+    ThumbnailReveal: {
+        position: 'absolute',
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        borderTop: '1px solid rgba(255,255,255,0.25)',
+        boxShadow: '0 -2px 10px rgba(0,0,0,0.25)'
+    },
+
 };
 
 export default styles;
