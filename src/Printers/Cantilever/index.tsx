@@ -49,7 +49,7 @@ const Cantilever = ({ printerConfig, thumbnailUrl }) => {
         cus_entity?.state ||
         (hass.states[config.use_mqtt ? `${config.base_entity}_print_progress` : `${config.base_entity}_job_percentage`] || { state: 0 }).state
     ) / 100;
-    
+
     const x = useMotionValue(0);
 
     useEffect(() => {

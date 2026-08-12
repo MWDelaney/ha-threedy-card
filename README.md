@@ -27,6 +27,7 @@
 
 - Live animation of 3D printer
 - Live camera view
+- Optional thumbnail reveal mode tied to print progress
 - Current states of various OctoPrint sensors
 - Tap to show/hide when printer is idle
 - Power button for a switch entity
@@ -175,6 +176,9 @@ base_entity: '' # You can use it if you want to override some of sensors and let
 name: 'Ender 3 Pro'
 printer_type: I3
 camera_entity: camera.ender_3_pro_camera
+thumbnail_entity: camera.ender_3_pro_camera
+thumbnail_attribute: entity_picture
+progress_color: '#222'
 power_entity: switch.ender3pro_plug
 light_entity: light.ender3_printer
 always_show: true
@@ -230,6 +234,11 @@ font: 'Roboto'
 scale: 1.0
 round: false 
 always_show: true
+# Thumbnail reveal is enabled only when thumbnail_entity is set.
+thumbnail_entity: camera.ender_3_camera
+thumbnail_attribute: entity_picture
+# Used when thumbnail_entity is omitted or unavailable.
+progress_color: '#222'
 ```
 </details>
 
